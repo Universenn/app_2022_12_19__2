@@ -1,5 +1,6 @@
 package com.ll.app_2022_12_19__2;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,10 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/chat")
+@RequiredArgsConstructor
 public class ChatController {
+
+    private final SseEmitters sseEmitters;
 
     private List<ChatMessage> chatMessages = new ArrayList<>();
 
@@ -35,6 +39,8 @@ public class ChatController {
         ChatMessage message = new ChatMessage(req.authorName(), req.content());
 
         chatMessages.add(message);
+
+        sseEmitters.noti("chat__messageAdded");
 
         return new RsData<>(
                 "S-1",
