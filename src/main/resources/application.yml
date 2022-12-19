@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.ll.exam.app_2022_12_19__1: debug
