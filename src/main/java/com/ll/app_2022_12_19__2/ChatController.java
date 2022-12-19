@@ -24,6 +24,12 @@ public class ChatController {
 
     public record MessagesRequest(Long fromId) {
     }
+
+    @GetMapping("/room")
+    public String showRoom() {
+        String s = "chat/room";
+        return s;
+    }
     @PostMapping("/writeMessage")
     @ResponseBody
     public RsData<WriteMessageResponse> writeMessage(@RequestBody WriteMessageRequest req) {
@@ -51,6 +57,16 @@ public class ChatController {
                     .filter(i -> chatMessages.get(i).getId() == req.fromId)
                     .findFirst()
                     .orElse(-1);
+
+            /*
+            int foundIndex = -1;
+            for ( int i = 0; i < messages.size(); i++ ) {
+                if ( messages.get(i).getId() == req.fromId ) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            */
 
             if (index != -1) {
                 // 만약에 index가 있다면, 0번 부터 index 번 까지 제거한 리스트를 만든다.
