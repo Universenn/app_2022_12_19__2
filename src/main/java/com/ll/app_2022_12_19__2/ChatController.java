@@ -27,8 +27,7 @@ public class ChatController {
 
     @GetMapping("/room")
     public String showRoom() {
-        String s = "chat/room";
-        return s;
+        return "chat/room";
     }
     @PostMapping("/writeMessage")
     @ResponseBody
